@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Login & Registration</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Martech</h1>
+        <div class="login-register-container">
+            <form action="/login" method="post" id="login-form">
+                <label for="login-username">Username:</label>
+                <input type="text" id="login-username" name="username" required>
+
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="password" required>
+
+                <button type="submit" class="login-button">Login</button>
+            </form>
+
+            <form action="/register" method="get" class="register-form">
+                <button type="submit" class="register-button">Register</button>
+            </form>
+        </div>
+
+        <p id="error-message" style="color:red;"></p>
+
+        <script>
+            const loginForm = document.getElementById('login-form');
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const username = document.getElementById('login-username').value;
+                const password = document.getElementById('login-password').value;
+
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `username=${username}&password=${password}`
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('access_token', data.access_token);
+                    if (data.is_admin) {
+                       window.location.href = '/admin';
+                    }
+                    else
+                    {
+                       window.location.href = '/upload';
+                    }
+                } else {
+                    const errorMsg = document.getElementById('error-message');
+                    errorMsg.innerText = 'Invalid login credentials. Please try again.';
+                }
+            });
+
+        </script>
+    </div>
+</body>
+</html>

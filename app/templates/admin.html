@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin: 15px;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Panel</h1>
+        <button class="btn" id="log-files-btn">File Upload Logs</button>
+        <button class="btn" id="full-data-btn">Full Data View</button>
+    </div>
+
+    <script>
+        document.getElementById('log-files-btn').addEventListener('click', () => {
+            window.location.href = '/admin/log-files';
+        });
+
+        document.getElementById('full-data-btn').addEventListener('click', () => {
+           window.location.href = '/admin/full-data';
+        });
+    </script>
+</body>
+</html>

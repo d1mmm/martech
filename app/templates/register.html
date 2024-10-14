@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Register</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        <form action="/register" method="post" id="register-form">
+            <label for="register-name">Name:</label>
+            <input type="text" id="register-name" name="name" required>
+
+            <label for="register-username">Username:</label>
+            <input type="text" id="register-username" name="username" required>
+
+            <label for="register-password">Password:</label>
+            <input type="password" id="register-password" name="password" required>
+
+            <button type="submit" class="register-button">Register</button>
+        </form>
+
+        <p id="error-message" style="color:red;"></p>
+
+        <script>
+            const registerForm = document.getElementById('register-form');
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('register-name').value;
+                const username = document.getElementById('register-username').value;
+                const password = document.getElementById('register-password').value;
+
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `name=${name}&username=${username}&password=${password}`
+                });
+
+                if (response.ok) {
+                    alert('Registration successful! You can now log in.');
+                    window.location.href = '/';
+                } else {
+                    const errorMsg = document.getElementById('error-message');
+                    errorMsg.innerText = 'Registration failed. Please try again.';
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin: Full Data</title>
+</head>
+<body>
+    <h1>Full Data from Uploaded Files</h1>
+    <table>
+        <tr>
+            <th>Advertiser</th>
+            <th>Brand</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Format</th>
+            <th>Platform</th>
+            <th>Impressions</th>
+        </tr>
+        {% for record in file_records %}
+        <tr>
+            <td>{{ record.advertiser }}</td>
+            <td>{{ record.brand }}</td>
+            <td>{{ record.start }}</td>
+            <td>{{ record.end }}</td>
+            <td>{{ record.format }}</td>
+            <td>{{ record.platform }}</td>
+            <td>{{ record.impr }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
